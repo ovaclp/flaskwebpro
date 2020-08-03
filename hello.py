@@ -1,15 +1,18 @@
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+from datetime import datetime
 from flask import Flask, request, make_response, redirect, abort, render_template, url_for
 
 
 app = Flask(__name__)
-# manager = Manager(app)
+manager = Manager(app)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', current_time=datetime.utcnow())
 
 
 @app.route('/user/<name>')
